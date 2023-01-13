@@ -12,7 +12,7 @@ const myMap = {
     createMap(){ 
         this.map = L.map('map', {
             center: this.coordinates,
-            zoom: 11,
+            zoom: 12,
         })
         //add tile layer
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -27,8 +27,8 @@ const myMap = {
     }
 
         
-    //create markers
-    //createMarkers()    
+    //create business markers
+    //businessMarkers(){}    
 }
 
 //get coords geolocation api
@@ -48,8 +48,26 @@ window.onload = async () => {
     
 }
 //POI submuit button
-document.getElementById('submitBtn').addEventListener('click', (event) =>{
-    event.preventDefault()
-    let business = document.getElementById('POIs').value
+document.getElementById('submit').addEventListener('click', async (event) => {
+    let business = document.getElementById('business').value
     console.log(business)
-}) 
+
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: "fsq3yylPfnCkDq0apL05blbc5pKNbzVYhKdkJU8ytM0aanw=",
+      },
+    };
+
+    fetch(
+      "https://api.foursquare.com/v3/places/search?query=xxx&ll=%20xxx&limit=5",
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+
+})
+
+//4square api fsq3W7lbQ9/kmVINE0wQTCsDRp3C9pUuAGoYo/eJEa9Xr8w=
